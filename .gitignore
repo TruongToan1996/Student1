@@ -5,6 +5,7 @@
 *.class
 *.dll
 *.exe
+
 *.pdb
 *.dll.config
 *.cache
@@ -24,6 +25,7 @@ _UpgradeReport_Files/
 ###############
 bin/
 obj/
+.vs/
 TestResults/
 ###################
 # Web publish log #
