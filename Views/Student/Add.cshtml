@@ -1,0 +1,42 @@
+﻿@model Student1.Models.Student.AddStudentViewModel
+@{
+}
+<h1>Add Student</h1>
+
+<form method="post" action="Add" class="mt-5">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">First Name</label>
+        <input type="text" class="form-control" asp-for="FirstName" />
+
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">First Name</label>
+        <input type="text" class="form-control" asp-for="t" />
+
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Last Name</label>
+        <input type="text" class="form-control" asp-for="LastName" />
+
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Lop</label>
+        <input type="text" class="form-control" asp-for="Lop" />
+
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Diem</label>
+        <input type="number" class="form-control" asp-for="Diem" />
+
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Date of birth</label>
+        <input type="date" class="form-control" asp-for="DateOfBirth" />
+
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
+
