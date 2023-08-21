@@ -1,0 +1,48 @@
+﻿@model Student1.Models.Teacher.UpdateTeacherModel
+@{
+}
+<h1>View Teacher</h1>
+
+
+<form method="post" class="mt-5">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Id</label>
+        <input type="text" class="form-control" asp-for="Id" readonly />
+
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Name</label>
+        <input type="text" class="form-control" asp-for="Name" />
+
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Date of birth</label>
+        <input type="date" class="form-control" asp-for="DateOfBirth" />
+
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Subject</label>
+        <input type="text" class="form-control" asp-for="Subject" />
+
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Age</label>
+        <input type="text" class="form-control" asp-for="Age" />
+
+    </div>
+
+
+    <button type="submit" class="btn btn-primary"
+            asp-action="ViewTeacher"
+            asp-controller="Teacher">
+        Submit
+    </button>
+
+    <button type="submit" class="btn-danger"
+            asp-action="Delete"
+            asp-controller="Teacher">
+        Delete
+    </button>
+</form>
+

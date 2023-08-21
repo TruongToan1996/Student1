@@ -1,0 +1,49 @@
+﻿@model List<Student1.Models.Teacher.TeacherModel>
+@{
+
+}
+<h1>Teacher List</h1>
+
+<form asp-controller="Teacher" asp-action="Index" method="get">
+    <div class="form-row align-items-center">
+        <div class="col-auto">
+            <label class="sr-only" for="inlineFormInput">Name:</label>
+            <input type="text" class="form-control mb-2" id="inlineFormInput" name="SearchString" placeholder="Please enter user's name....">
+        </div>
+
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+</form>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Date Of Birth</th>
+            <th>Subject</th>
+            <th>Age</th>
+            
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var teacher in Model)
+        {
+            <tr>
+                <td>@teacher.Id</td>
+                <td>@teacher.Name</td>
+                <td>@teacher.DateOfBirth.ToString("dd-MM-yyyy")</td>
+                <td>@teacher.Subject</td>
+                <td>@teacher.Age</td>
+
+                <td><a href="Teacher/ViewTeacher?id=@(teacher.Id)&name=@(teacher.Name)">View</a></td>
+            </tr>
+
+        }
+    </tbody>
+</table>

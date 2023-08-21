@@ -1,7 +1,31 @@
 ﻿@model List<Student1.Models.Student.StudentModel>
 @{
+    var isSelected = false;
+
 }
 <h1>Students List</h1>
+
+
+<form asp-controller="Student" asp-action="Index" method="get">
+    <div class="form-row align-items-center">
+        <div class="col-auto">
+            <label class="sr-only" for="inlineFormInput">Name:</label>
+            <input type="text" class="form-control mb-2" id="inlineFormInput" name="SearchString" placeholder="Please enter user's name....">
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" checked="@isSelected" name="IsUnique" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+                Is unique
+            </label>
+        </div>
+        
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+</form>
+
+
 
 <table class="table">
     <thead>
@@ -19,12 +43,12 @@
         @foreach (var student in Model)
         {
             <tr>
-                <td>@student.Id</td>
+                <td> @Html.DisplayFor(modelItem =>  @student.Id)</td>
                 <td>@student.Name</td>
                 <td>@student.Diem</td>
                 <td>@student.Lop</td>
                 <td>@student.DateOfBirth.ToString("dd-MM-yyyy")</td>
-                <td><a href="Student/View/@student.Id">View</a></td>
+                <td><a href="Student/View?id=@(student.Id)&name=@(student.Name)">View</a></td>
             </tr>
 
         }

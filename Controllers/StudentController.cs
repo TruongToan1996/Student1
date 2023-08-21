@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Student1.Data;
 using Student1.Models.Student;
+using Student1.Models.Teacher;
 
 namespace Student1.Controllers
 {
@@ -14,15 +15,41 @@ namespace Student1.Controllers
             this.dbContextStudent = dbContextStudent;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index() //list students
         {
             List<StudentModel> students = await dbContextStudent.Students.ToListAsync();
 
             return View(students);
         }
+        [HttpGet]
+        public async Task<IActionResult> Index(string SearchString,bool IsUnique) //list students
+        {
+            List<StudentModel> students = new List<StudentModel>();
+            if (!string.IsNullOrEmpty(SearchString)) // SearchString == null || SearchString ==""
+            {
+                if (IsUnique)
+                {
+                    students = await dbContextStudent.Students.Where(item => item.Name.Equals(SearchString)).ToListAsync();
+
+                }
+                else
+                {
+                    students = await dbContextStudent.Students.Where(item => item.Name.Contains(SearchString)).ToListAsync();
+
+                }
+            }
+            else
+            {
+                students = await dbContextStudent.Students.ToListAsync();
+               
+            }
+            
+
+            return View(students);
+        }
 
         [HttpGet]
-        public IActionResult Add()
+        public IActionResult Add() 
         {
             return View();
         }
@@ -30,7 +57,7 @@ namespace Student1.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddStudentViewModel addStudentRequest)
         {
-            var student = new StudentModel()
+            var  student = new StudentModel()
             {
                 Id = Guid.NewGuid(),
                 Name = addStudentRequest.getName(),
@@ -38,14 +65,25 @@ namespace Student1.Controllers
                 Diem = addStudentRequest.Diem,
                 DateOfBirth = addStudentRequest.DateOfBirth,
             };
-            
-            await dbContextStudent.Students.AddAsync(student);
-            await dbContextStudent.SaveChangesAsync();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                
+
+                await dbContextStudent.Students.AddAsync(student);
+                await dbContextStudent.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(addStudentRequest);
+            }
+           
         }
 
+
+
         [HttpGet]
-        public async Task<IActionResult> View(Guid id)
+        public async Task<IActionResult> View(Guid id,string name) //view Detail
         {
             var student = await dbContextStudent.Students.FirstOrDefaultAsync(x => x.Id == id);
             if (student != null)
@@ -64,7 +102,7 @@ namespace Student1.Controllers
             return RedirectToAction("Index");
         }
         [HttpPost]
-        public async Task<IActionResult> View(UpdateStudentViewModel update)
+        public async Task<IActionResult> View(UpdateStudentViewModel update) // update
         {
             var student = await dbContextStudent.Students.FindAsync(update.Id);
             if(student != null)
@@ -79,7 +117,7 @@ namespace Student1.Controllers
             }
             return RedirectToAction("Index");
         }
-
+       
         [HttpPost]
         public async Task<IActionResult> Delete (UpdateStudentViewModel update)
         {

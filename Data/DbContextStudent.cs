@@ -9,5 +9,6 @@ namespace Student1.Data
         public DbContextStudent(DbContextOptions options) : base(options) { }
         public DbSet<StudentModel> Students { get; set; }
         public DbSet<TeacherModel> Teachers { get; set; }
+        
     }
 }

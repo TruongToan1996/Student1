@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Student1.Data;
 
@@ -11,9 +12,11 @@ using Student1.Data;
 namespace Student1.Migrations
 {
     [DbContext(typeof(DbContextStudent))]
-    partial class DbContextStudentModelSnapshot : ModelSnapshot
+    [Migration("20230821065813_AddMoreTeacherTable2")]
+    partial class AddMoreTeacherTable2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,9 +42,7 @@ namespace Student1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -61,9 +62,7 @@ namespace Student1.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Subject")
                         .HasColumnType("nvarchar(max)");
